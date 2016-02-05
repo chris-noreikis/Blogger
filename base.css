@@ -3,9 +3,13 @@ html, body {
 }
 
 html body {
-   background-color: #333333;
+
 }
 
 html p, html h1 {
    color : #fff;
+}
+
+.main-header {
+   background-color: #333333;
 }

@@ -9,12 +9,12 @@ import * as BlogActions from '../actions'
 class App extends Component {
   render() {
     console.debug(this.props);
-    const { blogPosts, dispatch, reblogs } = this.props
+    const { blog_posts, dispatch, reblogs } = this.props
     return (
-      <div className="container">
+      <div>
         <Header />
         <div className="row">
-          {blogPosts.map(blogPost => <BlogPost />)}
+          {blog_posts.map(blogPost => <BlogPost />)}
         </div>
       </div>
     )
@@ -23,7 +23,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    blogPosts: state.blogger.blogPosts,
+    blog_posts: state.blogger.blog_posts,
     reblogs: state.blogger.reblogs
   }
 }
