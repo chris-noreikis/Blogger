@@ -3,26 +3,6 @@ import { createStore } from 'redux'
 import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG } from '../constants/actiontypes'
 import { BLOG_ID, BLOG_TITLE, BLOG_POSTER, BLOG_BODY, BLOG_TIME } from '../constants/blogpost'
 
-const initialStateTest = {
-    blog_posts: [{
-        blog_id: -2,
-        blog_body: 'Create a sample blog',
-        blog_title: 'Blog with friends is great!',
-        blog_poster: 'Jim',
-        blog_date: 1454633060055,
-        blog_comments: [],
-        reblogs: [],
-    }, {
-        blog_id: -1,
-        blog_body: 'I can make a blog too using this site!',
-        blog_title: 'I love blog with friends',
-        blog_poster: 'Randy',
-        blog_date: 1454633030040,
-        blog_comments: [],
-        reblogs: []
-    }],
-}
-
 function blog(state, action) {
     switch (action.type) {
         case ADD_BLOG:

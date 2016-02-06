@@ -23,8 +23,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    blog_posts: state.blogger.blog_posts,
-    reblogs: state.blogger.reblogs
+    blog_posts: state
   }
 }
 

@@ -6,7 +6,7 @@ describe('blog actions', () => {
 
     it('addBlog creates an ADD_BLOG action', () => {
         const creationTime = Date.now();
-        expect(actions.addBlog('Blog body', 'Blog title', 'Blog poster', creationTime)).toEqual({
+        expect(actions.addBlog('Blog body', 'Blog title', 'Blog poster', creationTime)()).toEqual({
             type: ADD_BLOG,
             blog_body: 'Blog body',
             blog_title: 'Blog title',
