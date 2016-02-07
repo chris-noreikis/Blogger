@@ -1,4 +1,7 @@
 import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG } from '../constants/actiontypes'
+import { SOCKET_URL } from '../constants/utility'
+const io = require('socket.io-client')
+const socket = io.connect(SOCKET_URL);
 
 export function addBlogOptimistic(blog_body, blog_title, blog_poster, blog_time) {
     return {
@@ -32,19 +35,20 @@ export function addCommentOptimistic(comment_poster, comment_body, comment_time,
     }
 }
 
-export function addComment(...args) {
-
+export function addComment(comment_poster, comment_body, comment_time, blog_id) {
   return function(dispatch) {
-    dispatch(addCommentOptimistic(...args));
-
-    socket.emit('commentAdded', args, function (error, message) {
-        // TODO: remove added comment
+    
+    dispatch(addCommentOptimistic(comment_poster, comment_body, comment_time, blog_id));
+    socket.emit('commentAdded', {comment_poster, comment_body, comment_time, blog_id}, function (error, message) {
         console.log(dispatch);
     })
   }
 }
 
 export function reblogBlogOptimistic(blog_poster, reblog_time, blog_id) {
+    console.debug(blog_poster);
+    console.debug(reblog_time);
+    console.debug(blog_id);
     return {
         type: REBLOG_BLOG,
         blog_poster,
@@ -54,7 +58,7 @@ export function reblogBlogOptimistic(blog_poster, reblog_time, blog_id) {
 }
 
 export function reblogBlog(...args) {
-
+    console.debug(arguments);
   return function(dispatch) {
     dispatch(reblogBlogOptimistic(...args));
 

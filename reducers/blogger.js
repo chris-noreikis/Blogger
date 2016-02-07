@@ -45,6 +45,7 @@ function blog(state, action) {
 }
 
 export default function blogs(state = [], action) {
+    
     switch (action.type) {
         case ADD_BLOG:
             action[BLOG_ID] = state.reduce((maxId, blog) => Math.max(blog[BLOG_ID], maxId), -1) + 1;
