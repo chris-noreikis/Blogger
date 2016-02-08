@@ -13,12 +13,11 @@ export function addBlogOptimistic(blog_body, blog_title, blog_poster, blog_time)
     }
 }
 
-export function addBlog(...args) {
-
+export function addBlog(blog_body, blog_title, blog_poster, blog_time) {
   return function(dispatch) {
-    dispatch(addBlogOptimistic(...args));
+    dispatch(addBlogOptimistic(blog_body, blog_title, blog_poster, blog_time));
 
-    socket.emit('blogAdded', args, (error) => (message) => {
+    socket.emit('blogAdded', {blog_body, blog_title, blog_poster, blog_time}, (error, message) => {
         // TODO: remove added blog
         throw new Error("Failed to add blog");
     })
@@ -40,15 +39,12 @@ export function addComment(comment_poster, comment_body, comment_time, blog_id) 
     
     dispatch(addCommentOptimistic(comment_poster, comment_body, comment_time, blog_id));
     socket.emit('commentAdded', {comment_poster, comment_body, comment_time, blog_id}, function (error, message) {
-        console.log(dispatch);
+        //TODO: remove comment
     })
   }
 }
 
 export function reblogBlogOptimistic(blog_poster, reblog_time, blog_id) {
-    console.debug(blog_poster);
-    console.debug(reblog_time);
-    console.debug(blog_id);
     return {
         type: REBLOG_BLOG,
         blog_poster,
@@ -57,14 +53,12 @@ export function reblogBlogOptimistic(blog_poster, reblog_time, blog_id) {
     }
 }
 
-export function reblogBlog(...args) {
-    console.debug(arguments);
+export function reblogBlog(blog_poster, reblog_time, blog_id) {
   return function(dispatch) {
-    dispatch(reblogBlogOptimistic(...args));
+    dispatch(reblogBlogOptimistic(blog_poster, reblog_time, blog_id));
 
-    socket.emit('reblogAdded', args, function (error, message) {
-        // TODO: remove added reblog
-        console.log(dispatch);
+    socket.emit('reblogAdded', {blog_poster, reblog_time, blog_id}, function (error, message) {
+        // TODO:  remove reblog
     })
   }
 }

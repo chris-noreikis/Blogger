@@ -4,53 +4,67 @@ import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap';
 import Header from '../components/header'
 import BlogPost from '../components/blogpost'
+import Reblog from '../components/reblogpost'
+import BlogList from '../components/bloglist'
+import NewBlog from '../components/newblog'
+import { routeActions } from 'react-router-redux'
 import * as BlogActions from '../actions'
 import { Router, Route, Link, browserHistory } from 'react-router'
-import { routeActions } from 'react-router-redux'
 
 
-class App extends Component {
-  render() {
-    const { blog_posts, actions } = this.props
-    const sorted_blogs_reblogs = blog_posts.reduce((prevVal, blog, index, array) => {
-        return prevVal.concat(blog.reblogs).concat(array[index]);
-    }, []).sort((a,b) => {
-      const time1 = a.reblog_time || a.blog_date;
-      const time2 = b.reblog_time || b.blog_date;
-      return time1 < time2;
-    });
-
-    let blogs_reblogs = [];
-
-    sorted_blogs_reblogs.map((blogPost, index) => {
-      if (blogPost.reblog_time) {
-
-      } else if (blogPost.blog_date) {
-        blogs_reblogs.push(
-          <BlogPost key={index} blog={blogPost} 
-          onCommentAdd={actions.addComment} onReblogClick={actions.reblogBlog}/>
-        )
-      }
-    })
-
+const App = (props) => {
+    const { blog_posts, actions, location } = props
     return (
       <div>
-        <Header onNewBlogClick={() => actions.push('newblog')}/>
+        <Header onNewBlogClick={() => actions.push('/newblog')}/>
         <div className="container">
             <div className="row">
-                <div className="col-md-9 col-md-offset-2">
-                  {blogs_reblogs}
-                </div>
+                  <BlogList blog_posts={blog_posts} onCommentAdd={actions.addComment} onReblogClick={actions.reblogBlog}
+                    onBlogClick={(blog_id) => actions.push('/' + blog_id)}/>
             </div>
         </div>
       </div>
     )
-  }
-}
+};
+
+const AddBlog = (props) => {
+  const { blog_posts, actions, location } = props
+  return (
+    <div>
+      <Header onBackClick={() => actions.push('/')}/>
+      <div className="container">
+          <div className="row">
+          <NewBlog onBlogAdded={(blog_body, blog_title, blog_poster, blog_time) =>
+                                 {actions.addBlog(blog_body, blog_title, blog_poster, blog_time);actions.push('/')}}/>
+          </div>
+      </div>
+    </div>
+  )
+};
+
+const BlogDetails = (props) => {
+  const { blog_posts, actions, location, blog_id } = props
+  const blogPost = (blog_posts.filter((x) => {
+    return x.blog_id == blog_id
+  }))[0]
+  return (
+    <div>
+      <Header onBackClick={() => actions.push('/')}/>
+      <div className="container">
+          <div className="row">
+            <BlogPost blog={blogPost} 
+            onCommentAdd={props.addComment} onReblogClick={props.onReblogClick}/>
+          </div>
+      </div>
+    </div>
+  )
+};
 
 function mapStateToProps(state, ownProps) {
   return {
-    blog_posts: state
+    blog_posts: state,
+    location: ownProps.location.pathname,
+    blog_id: ownProps.params.blog_id
   }
 }
 
@@ -60,7 +74,19 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
+const AppView = connect(
   mapStateToProps,
   mapDispatchToProps
 )(App)
+
+const NewBlogView = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddBlog)
+
+const BlogDetailsView = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlogDetails)
+
+module.exports = { NewBlogView, AppView, BlogDetailsView };
