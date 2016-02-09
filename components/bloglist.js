@@ -25,7 +25,7 @@ const BlogList = (props) => {
 
   let blogs_reblogs = [];
 
-  var markup = sorted_blogs_reblogs.map((blogPost, index) => {
+  sorted_blogs_reblogs.forEach((blogPost, index) => {
     if (blogPost.reblog_time) {   
       blogs_reblogs.push(<Reblog key={index} reblog={blogPost} onBlogClick={props.onBlogClick} blog_id={blogPost.blog_id}/>)
     } else if (blogPost.blog_time) {

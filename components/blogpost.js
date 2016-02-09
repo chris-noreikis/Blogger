@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import CommentSection from './commentsection'
 import NewReblog from './newreblog'
 import marked from 'marked';
+import { getFormattedDate } from '../utility/'
 
 class BlogPost extends Component {
   getMarkdown(){
@@ -16,7 +17,7 @@ class BlogPost extends Component {
               <NewReblog onReblogClick={this.props.onReblogClick} blog_id={this.props.blog.blog_id}/>
           </h1>
           <div className="author">
-              Posted by {this.props.blog.blog_poster} on <i> {this.props.blog.blog_time} </i>
+              Posted by {this.props.blog.blog_poster} on <i> {getFormattedDate(this.props.blog.blog_time)} </i>
           </div>
           <hr align="left"/>
           <div className="post-body" dangerouslySetInnerHTML={this.getMarkdown.bind(this)()}>

@@ -17,7 +17,6 @@ const socket = io.connect(SOCKET_URL);
 const store = configureStore();
 
 socket.on('stateTree', function (state) {
-  console.debug(STATE_RECEIVED);
   store.dispatch({type: STATE_RECEIVED, state})
 });
 

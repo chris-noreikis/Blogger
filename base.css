@@ -25,11 +25,6 @@ html, body {
 }
 
 .header {
-/*   background-color: #3f3f3f;
- background-image: -webkit-linear-gradient(top, #696969 0%,#3f3f3f 100%);
- background-image: -moz-linear-gradient(top, #696969 0%,#3f3f3f 100%);
- background-image: -o-linear-gradient(top, #696969 0%,#3f3f3f 100%);
- background-image: linear-gradient(top, #696969 0%,#3f3f3f 100%);*/
  background-color: gray;
  background: no-repeat center center;
  background-attachment: scroll;
@@ -101,4 +96,8 @@ html, body {
 
 .fa-rss:hover {
    opacity: 1.0;
+}
+
+.reblog-section {
+   padding: 1rem .5rem 1rem 0;
 }

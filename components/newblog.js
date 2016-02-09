@@ -20,13 +20,13 @@
       this.setState({blogText: this.state.blogText + "**bold**"})
     }
     listClicked() {
-      this.setState({blogText: this.state.blogText + "italics*"})
+      this.setState({blogText: this.state.blogText + "- an\n- unordered\n- list"})
     }
     codeClicked() {
-      this.setState({blogText: this.state.blogText + "`<p> Hello world! </p>`"})
+      this.setState({blogText: this.state.blogText + "`<p> Hello Prevail! </p>`"})
     }
     imageClicked(){
-      this.setState({blogText: this.state.blogText + "*italics*"})
+      this.setState({blogText: this.state.blogText + "![Alt horsey!](http://ecx.images-amazon.com/images/I/51NhtW9exnL.jpg)"})
     }
     blogAdd(title, name) {
        this.props.onBlogAdded(this.state.blogText, title.value, name.value, Date.now() );

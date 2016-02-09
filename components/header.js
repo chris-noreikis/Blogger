@@ -7,7 +7,7 @@ class Header extends Component {
       backgroundImage: 'url(' + require("../images/header_photo.png") + ')',
     };
     return (
-      <div className="header text-center" style={divStyle}>
+      <div className="header text-center" style={inlineStyle}>
           <div className="container">
               {this.props.onNewBlogClick ?<i id="add-blog-icon" className="fa fa-plus medium-icon needs-click" onClick={this.props.onNewBlogClick}></i>: null}
               {this.props.onBackClick ?<i id="back-icon" className="fa fa-arrow-left medium-icon needs-click" onClick={this.props.onBackClick}></i>: null}

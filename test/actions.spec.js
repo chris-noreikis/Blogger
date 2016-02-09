@@ -6,7 +6,7 @@ describe('blog actions', () => {
 
     it('addBlog creates an ADD_BLOG action', () => {
         const creationTime = Date.now();
-        expect(actions.addBlog('Blog body', 'Blog title', 'Blog poster', creationTime)()).toEqual({
+        expect(actions.addBlogOptimistic('Blog body', 'Blog title', 'Blog poster', creationTime)).toEqual({
             type: ADD_BLOG,
             blog_body: 'Blog body',
             blog_title: 'Blog title',
@@ -18,7 +18,7 @@ describe('blog actions', () => {
     it('addComment creates an ADD_COMMENT action', () => {
         const creationTime = Date.now();
         const blog_id = 0;
-        expect(actions.addComment('Blog poster', 'Comment body', creationTime, blog_id)).toEqual({
+        expect(actions.addCommentOptimistic('Blog poster', 'Comment body', creationTime, blog_id)).toEqual({
             type: ADD_COMMENT,
             comment_poster: 'Blog poster',
             comment_body: 'Comment body',
@@ -30,7 +30,7 @@ describe('blog actions', () => {
     it('reblogBlog creates an REBLOG_BLOG action', () => {
         const creationTime = Date.now();
         const blog_id = 0;
-        expect(actions.reblogBlog('Blog poster', creationTime, blog_id)).toEqual({
+        expect(actions.reblogBlogOptimistic('Blog poster', creationTime, blog_id)).toEqual({
             type: REBLOG_BLOG,
             blog_poster: 'Blog poster',
             reblog_time: creationTime,
