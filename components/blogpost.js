@@ -1,8 +1,13 @@
 import React, { PropTypes, Component } from 'react'
 import CommentSection from './commentsection'
 import NewReblog from './newreblog'
+import marked from 'marked';
 
 class BlogPost extends Component {
+  getMarkdown(){
+    var rawMarkup = marked(this.props.blog.blog_body);
+    return {__html: rawMarkup};
+  }
   render() {
     return (
       <div href="post">
@@ -13,9 +18,9 @@ class BlogPost extends Component {
           <div className="author">
               Posted by {this.props.blog.blog_poster} on <i> {this.props.blog.blog_time} </i>
           </div>
-          <hr className="small-hr" align="left"/>
-          <div className="post-body">
-            {this.props.blog.blog_body}
+          <hr align="left"/>
+          <div className="post-body" dangerouslySetInnerHTML={this.getMarkdown.bind(this)()}>
+
           </div>
           <CommentSection blog_id={this.props.blog.blog_id} comments={this.props.blog.blog_comments} reblogs={this.props.blog.reblogs} 
           onCommentAdd={this.props.onCommentAdd}/>

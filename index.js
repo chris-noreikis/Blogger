@@ -9,12 +9,17 @@ import { Router, Route, browserHistory } from 'react-router'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { STATE_RECEIVED } from './constants/actiontypes'
 
 const io = require('socket.io-client')
 const socket = io.connect(SOCKET_URL);
 
-socket.on('stateTree', function (initialState) {
-   const store = configureStore(initialState);
+const store = configureStore();
+
+socket.on('stateTree', function (state) {
+  console.debug(STATE_RECEIVED);
+  store.dispatch({type: STATE_RECEIVED, state})
+});
 
    render(
      <Provider store={store}>
@@ -26,4 +31,3 @@ socket.on('stateTree', function (initialState) {
      </Provider>,
      document.getElementById('main')
    )
-});

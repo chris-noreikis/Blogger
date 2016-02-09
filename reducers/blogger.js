@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 import { createStore } from 'redux'
-import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG } from '../constants/actiontypes'
+import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG, STATE_RECEIVED } from '../constants/actiontypes'
 import { BLOG_ID, BLOG_TITLE, BLOG_POSTER, BLOG_BODY, BLOG_TIME } from '../constants/blogpost'
 
 function blog(state, action) {
@@ -63,6 +63,9 @@ export default function blogs(state = [], action) {
             return state.map(b =>
                 blog(b, action)
             )
+
+        case STATE_RECEIVED:
+            return action.state;
 
         default:
             return state

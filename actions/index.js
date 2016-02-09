@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG } from '../constants/actiontypes'
+import { ADD_BLOG, ADD_COMMENT, REBLOG_BLOG, STATE_RECEIVED } from '../constants/actiontypes'
 import { SOCKET_URL } from '../constants/utility'
 const io = require('socket.io-client')
 const socket = io.connect(SOCKET_URL);

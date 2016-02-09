@@ -88,6 +88,10 @@ io.on('connection', function(socket) {
                   reblogs: []
       })
       blog.save();
+
+      Blog.find((err, blogs) => {
+          socket.broadcast.emit('stateTree', blogs);      
+       })
     });
 
     socket.on('commentAdded', function(data) {
@@ -100,6 +104,10 @@ io.on('connection', function(socket) {
           })
           blog.save();
         });
+
+        Blog.find((err, blogs) => {
+            socket.broadcast.emit('stateTree', blogs);      
+         })
     });
 
     socket.on('reblogAdded', function(data) {
@@ -111,6 +119,10 @@ io.on('connection', function(socket) {
           })
           blog.save();
         });
+
+        Blog.find((err, blogs) => {
+            socket.broadcast.emit('stateTree', blogs);      
+         })
     });
 
 });
