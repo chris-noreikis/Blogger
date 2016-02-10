@@ -11,7 +11,7 @@ class BlogPost extends Component {
   }
   render() {
     return (
-      <div href="post">
+      <div href="post" className="post">
           <h1 className="title">
               {this.props.blog.blog_title}
               <NewReblog onReblogClick={this.props.onReblogClick} blog_id={this.props.blog.blog_id}/>

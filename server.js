@@ -40,7 +40,7 @@ autoIncrement.initialize(mongoose.connection);
 
 db.once('open', function(err, msg) {
     // for testing
-   // mongoose.connection.db.dropDatabase();
+//    mongoose.connection.db.dropDatabase();
 });
 
 var blogSchema = mongoose.Schema({
