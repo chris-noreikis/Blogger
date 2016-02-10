@@ -50,7 +50,7 @@ html, body {
 }
 
 .post {
-   overflow: scroll;
+   overflow-x: scroll;
 }
 
 .comment-section {
