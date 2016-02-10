@@ -9,7 +9,12 @@ class AddComment extends Component {
      event.preventDefault();
 
      if (form.checkValidity()) {
-      this.props.onCommentAdd(name, comment, Date.now(), this.props.blog_id );
+      let nameVal = name.value,
+           commentVal = comment.value;
+
+      name.value = '';
+      comment.value = '';
+      this.props.onCommentAdd(nameVal, commentVal, Date.now(), this.props.blog_id );
      }
    }
   render() {
@@ -17,7 +22,7 @@ class AddComment extends Component {
    let name, comment, blog_id = this.props.blog_id, form
 
     return (
-      <form ref={node => form = node} onSubmit={(event) => {this.commentAdd(name.value, comment.value, form, event)}}>
+      <form ref={node => form = node} onSubmit={(event) => {this.commentAdd(name, comment, form, event)}}>
         <fieldset className="form-group">
           <input type="text" className="form-control" placeholder="Name" ref={node => name = node} required/>
         </fieldset>
