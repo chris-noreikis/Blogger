@@ -18,9 +18,9 @@ const BlogList = (props) => {
 
 
   }, []).sort((a,b) => {
-    const time1 = a.reblog_time || a.blog_time;
-    const time2 = b.reblog_time || b.blog_time;
-    return time1 < time2;
+    let time1 = a.reblog_time || a.blog_time;
+    let time2 = b.reblog_time || b.blog_time;
+    return time2 - time1;
   });
 
   let blogs_reblogs = [];

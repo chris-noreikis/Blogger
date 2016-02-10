@@ -28,27 +28,32 @@
     imageClicked(){
       this.setState({blogText: this.state.blogText + "![Alt horsey!](http://ecx.images-amazon.com/images/I/51NhtW9exnL.jpg)"})
     }
-    blogAdd(title, name) {
+    blogAdd(title, name, form, event) {
+      event.preventDefault();
+
+      if (form.checkValidity()) {
        this.props.onBlogAdded(this.state.blogText, title.value, name.value, Date.now() );
+      }
     }
    render() {
 
      let name,
           title,
-          blogText = this.state.blogText;
+          blogText = this.state.blogText,
+          form;
 
      return (
       <div className="col-md-12">
       <div className="row">
       <div className="col-md-6">
-      <form className="form">
+      <form className="form" ref={node => form = node} onSubmit={(event) => {this.blogAdd(title, name, form, event)}}>
       <fieldset className="form-group">
         <label htmlFor="blog-name">Blog Title</label>
-        <input type="text" className="form-control" placeholder="Blog Title" id="blog-name" ref={node => title = node}/>
+        <input type="text" className="form-control" placeholder="Blog Title" id="blog-name" ref={node => title = node} required/>
         </fieldset>
         <fieldset className="form-group">
           <label htmlFor="blog-name">Name</label>
-          <input type="text" className="form-control" placeholder="Name" id="blog-name" ref={node => name = node}/>
+          <input type="text" className="form-control" placeholder="Name" id="blog-name" ref={node => name = node} required/>
           </fieldset>
         <fieldset className="form-group">
           <label htmlFor="blog-text">Blog Content</label>
@@ -59,9 +64,9 @@
           <i className="fa fa-list-ul needs-click" onClick={this.listClicked.bind(this)}></i>
           <i className="fa fa-code needs-click" onClick={this.codeClicked.bind(this)}></i>
           </div>
-          <textarea type="text" className="form-control" placeholder="Blog" id="blog-text" rows="8" onChange={this.handleBlogTextChange.bind(this)} value={blogText}></textarea>
+          <textarea type="text" className="form-control" placeholder="Blog" id="blog-text" rows="8" onChange={this.handleBlogTextChange.bind(this)} value={blogText} required></textarea>
         </fieldset>
-        <button type="button" className="btn btn-default" onClick={() => {this.blogAdd(name, title, blogText)}}>Submit</button>
+        <button type="submit" className="btn btn-default">Post Blog</button>
        </form>
        </div>
        <div className="col-md-6">

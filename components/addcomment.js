@@ -5,21 +5,26 @@ class AddComment extends Component {
    constructor(props) {
      super(props);
    }
+   commentAdd(name, comment, form, event) {
+     event.preventDefault();
+
+     if (form.checkValidity()) {
+      this.props.onCommentAdd(name, comment, Date.now(), this.props.blog_id );
+     }
+   }
   render() {
 
-   let name,
-        comment,
-        blog_id = this.props.blog_id;
+   let name, comment, blog_id = this.props.blog_id, form
 
     return (
-      <form>
+      <form ref={node => form = node} onSubmit={(event) => {this.commentAdd(name.value, comment.value, form, event)}}>
         <fieldset className="form-group">
-          <input type="text" className="form-control" placeholder="Name" ref={node => name = node} />
+          <input type="text" className="form-control" placeholder="Name" ref={node => name = node} required/>
         </fieldset>
         <fieldset className="form-group">
-          <textarea type="text" className="form-control" placeholder="Comment" ref={node => comment = node}></textarea>
+          <textarea type="text" className="form-control" placeholder="Comment" ref={node => comment = node} required></textarea>
         </fieldset>
-        <button type="button" className="btn btn-default" onClick={() => {this.props.onCommentAdd(name.value, comment.value, Date.now(), blog_id )}}>Submit</button>
+        <button type="submit" className="btn btn-default">Submit</button>
        </form>
     )
   }

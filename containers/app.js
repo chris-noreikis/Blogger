@@ -52,8 +52,8 @@ const BlogDetails = (props) => {
       <Header onBackClick={() => actions.push('/')}/>
       <div className="container">
           <div className="row">
-            <BlogPost blog={blogPost} 
-            onCommentAdd={props.addComment} onReblogClick={props.onReblogClick}/>
+            {blogPost ? <BlogPost blog={blogPost} 
+            onCommentAdd={actions.addComment} onReblogClick={actions.reblogBlog}/> : null }
           </div>
       </div>
     </div>

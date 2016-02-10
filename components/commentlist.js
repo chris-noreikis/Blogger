@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import { getFormattedDate } from '../utility/'
 
 const CommentList = (props) => {
    var renderedComments = props.comments.map((comment, index) => 
@@ -8,7 +9,7 @@ const CommentList = (props) => {
                   {comment.comment_body}
               </div>
               <div className="comment-author">
-                  <i> {comment.comment_date} </i> <b> {comment.comment_poster} </b> 
+                  <b> {comment.comment_poster} </b> - <i> {getFormattedDate(comment.comment_time)} </i>
               </div>
           </div>
       </div>

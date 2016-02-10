@@ -8,21 +8,30 @@ class NewReblog extends Component {
    click() {
       this.setState({showNameField: !this.state.showNameField});
    }
+   reblogClick(name, form, blog_id, event) {
+    event.preventDefault();
+
+    if (form.checkValidity()) {
+      this.props.onReblogClick(name, Date.now(), this.props.blog_id)
+    }
+   }
   render() {
-    let name
+    let name, form
     return (
       <div>
         <span> <i className="fa fa-retweet needs-click right" onClick={this.click.bind(this)}></i> </span> 
         {this.state.showNameField ? (
+          <form ref={node => form = node} 
+          onSubmit={(e) => {this.reblogClick(name.value, form, this.props.blog_id, e).bind(this)}}>
         <div className="input-group reblog-section">
-          <input type="text" className="form-control" placeholder="Name" ref={node => name = node}/>
+          <input type="text" className="form-control" placeholder="Name" ref={node => name = node} required/>
           <span className="input-group-btn">
-            <button className="btn btn-default" type="button" onClick={() => {this.props.onReblogClick(name.value, Date.now(), this.props.blog_id)}}>Reblog</button>
+          <button type="submit" className="btn btn-default">Reblog</button>
           </span>
           <span className="input-group-btn">
             <button className="btn btn-default" type="button" onClick={this.click.bind(this)}>Cancel</button>
           </span>
-        </div>) : null }
+        </div> </form>) : null }
       </div>
     )
   }
