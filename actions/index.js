@@ -3,6 +3,10 @@ import { SOCKET_URL } from '../constants/utility'
 const io = require('socket.io-client')
 const socket = io.connect(SOCKET_URL);
 
+// The optimistic functions below are used for error handling with React-Thunk
+// React-Thunk lets allows code to dispatch a function call instead of an object,
+// giving functions closure over the dispatch method to call it later on
+
 export function addBlogOptimistic(blog_body, blog_title, blog_poster, blog_time) {
     return {
         type: ADD_BLOG,

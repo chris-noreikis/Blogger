@@ -16,8 +16,12 @@ class CommentSection extends Component {
           <btn className="needs-click" onClick={this.click.bind(this)}>
                  {this.props.comments.length}  <i className="fa fa-comments"></i> 
           </btn>
-      { this.state.showComments ? <CommentList comments={this.props.comments}/>  : null}
-      { this.state.showComments ? <AddComment blog_id={this.props.blog_id} onCommentAdd={this.props.onCommentAdd}/> : null}
+          { this.state.showComments ? 
+                <div>
+                  <CommentList comments={this.props.comments}/> 
+                  <AddComment blog_id={this.props.blog_id} onCommentAdd={this.props.onCommentAdd}/> 
+                </div>
+              : null }
       </div>
     )
   }

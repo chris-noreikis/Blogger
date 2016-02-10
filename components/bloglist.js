@@ -6,6 +6,8 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 
 const BlogList = (props) => {
 
+  // Flatten, sort blogs & reblogs into a single structure for display 
+  // on the timeline
   const sorted_blogs_reblogs = props.blog_posts.reduce((prevVal, blog, index, array) => {
 
       return prevVal.concat(blog.reblogs.map((reblog) => {
