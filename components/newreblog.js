@@ -29,7 +29,7 @@ class NewReblog extends Component {
           <button type="submit" className="btn btn-default">Reblog</button>
           </span>
           <span className="input-group-btn">
-            <button className="btn btn-default" type="submit" onClick={this.click.bind(this)}>Cancel</button>
+            <button className="btn btn-default" type="button" onClick={this.click.bind(this)}>Cancel</button>
           </span>
         </div> </form>) : null }
       </div>
