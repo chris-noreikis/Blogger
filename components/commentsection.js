@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import CommentList from './commentlist'
-import AddComment from './addcomment'
+import AddComment from './newcomment'
 
 class CommentSection extends Component {
    constructor(props) {

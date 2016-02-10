@@ -26,7 +26,7 @@
       this.setState({blogText: this.state.blogText + "`<p> Hello Prevail! </p>`"})
     }
     imageClicked(){
-      this.setState({blogText: this.state.blogText + "![Alt horsey!](http://ecx.images-amazon.com/images/I/51NhtW9exnL.jpg)"})
+      this.setState({blogText: this.state.blogText + "![Alt horsey!](http://ecx.images-amazon.com/images/I/51NhtW9exnL._SX300_.jpg)"})
     }
     blogAdd(title, name, form, event) {
       event.preventDefault();
