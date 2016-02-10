@@ -53,7 +53,8 @@ const BlogDetails = (props) => {
       <div className="container">
           <div className="row">
             {blogPost ? <BlogPost blog={blogPost} 
-            onCommentAdd={actions.addComment} onReblogClick={() => {actions.reblogBlog;actions.push('/');}}/> : null }
+            onCommentAdd={actions.addComment} onReblogClick={(name, form, blog_id, event) =>
+             {actions.reblogBlog(name, form, blog_id, event);actions.push('/');}}/> : null }
           </div>
       </div>
     </div>
